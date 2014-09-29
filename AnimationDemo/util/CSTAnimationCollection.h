@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CSTGlobal.h"
 
 @interface CSTAnimationCollection : NSObject
+-(SEL)getAnimationSEL:(CSTAnimation)type;
 
 @end

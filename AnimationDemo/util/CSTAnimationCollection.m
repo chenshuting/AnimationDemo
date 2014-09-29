@@ -9,5 +9,12 @@
 #import "CSTAnimationCollection.h"
 
 @implementation CSTAnimationCollection
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark - public
+-(SEL)getAnimationSEL:(CSTAnimation)type
+{
+
+    return nil;
+}
 
 @end

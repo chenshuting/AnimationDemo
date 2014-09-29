@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSTRootViewController : UIViewController
+@interface CSTNavigationViewController : UINavigationController
 
 @end

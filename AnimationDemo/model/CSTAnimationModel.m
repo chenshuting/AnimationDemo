@@ -10,4 +10,21 @@
 
 @implementation CSTAnimationModel
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark private
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark accessor
+-(NSArray *)menuData
+{
+    if (!_menuData) {
+        _menuData = [[NSArray alloc] initWithObjects:
+                    @"Fade in/out", @"Twinkle", @"Moving", @"Blow up", @"Rotate",
+                    nil];
+    }
+    return _menuData;
+}
+
 @end

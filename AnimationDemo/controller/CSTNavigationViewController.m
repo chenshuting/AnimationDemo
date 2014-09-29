@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 Violet Iris. All rights reserved.
 //
 
-#import "CSTRootViewController.h"
+#import "CSTNavigationViewController.h"
 
-@implementation CSTRootViewController
+@implementation CSTNavigationViewController
 
 @end

@@ -8,8 +8,12 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+#import "CSTAnimationViewController.h"
+#import "CSTNavigationViewController.h"
 
+@interface AppDelegate ()
+@property (nonatomic, strong) CSTAnimationViewController *rootViewController;
+@property (nonatomic, strong) CSTNavigationViewController *navigationController;
 @end
 
 @implementation AppDelegate
@@ -17,6 +21,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = self.rootViewController;
+    
+    [self.navigationController pushViewController:self.rootViewController animated:YES];
+    [self.window addSubview:self.navigationController.view];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -40,6 +51,23 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Private Accessor
+-(CSTAnimationViewController *)rootViewController
+{
+    if (!_rootViewController) {
+        _rootViewController = [[CSTAnimationViewController alloc] init];
+    }
+    return _rootViewController;
+}
+
+-(CSTNavigationViewController *)navigationController
+{
+    if (!_navigationController) {
+        _navigationController = [[CSTNavigationViewController alloc] init];
+    }
+    return _navigationController;
 }
 
 @end

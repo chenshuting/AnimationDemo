@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  CSTViewController.h
 //  AnimationDemo
 //
 //  Created by shuting.chen on 14-9-28.
@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSTAnimationModel.h"
+#import "CSTGlobal.h"
 
-@interface ViewController : UIViewController
+@interface CSTAnimationViewController : UIViewController
+@property (nonatomic, strong) CSTAnimationModel *dataModel;
 
-
+-(void)animationChanged:(CSTAnimation)animationType;
 @end
 

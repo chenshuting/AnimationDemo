@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSTAnimationViewController.h"
 
 @interface CSTBaseView : UIView
 /**
  *  指向控制该view的controller
  */
-@property (nonatomic, strong) UIViewController *viewController;
+@property (nonatomic, strong) CSTAnimationViewController *viewController;
 @end

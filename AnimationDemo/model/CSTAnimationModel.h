@@ -10,4 +10,6 @@
 
 @interface CSTAnimationModel : NSObject
 
+@property (nonatomic, strong) NSArray *menuData;
+
 @end

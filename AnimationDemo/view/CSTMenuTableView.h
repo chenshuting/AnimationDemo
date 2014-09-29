@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CSTBaseView.h"
+#import "CSTAnimationModel.h"
 
 @interface CSTMenuTableView : CSTBaseView
+@property (nonatomic, strong) CSTAnimationModel *dataModel;
 
+-(void)showMenu;
+-(void)hideMenu;
 @end
