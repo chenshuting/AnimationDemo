@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "CSTGlobal.h"
+#import "CSTAnimationViewController.h"
 
 @interface CSTAnimationCollection : NSObject
+@property (nonatomic, strong) CSTAnimationViewController *viewController;
+
 -(SEL)getAnimationSEL:(CSTAnimation)type;
 
+-(float)timeInterval:(CSTAnimation)type;
 @end
