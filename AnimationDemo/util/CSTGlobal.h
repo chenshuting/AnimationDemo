@@ -13,6 +13,11 @@
 #define CST_SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define CST_SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 
+#define CST_ANIMATION_LEFT 0
+#define CST_ANIMATION_RIGHT (CST_SCREEN_WIDTH - CST_ANIMATION_VIEW_SIZE)
+#define CST_ANIMATION_TOP CST_NAVIBAR_HEIGHT
+#define CST_ANIMATION_BOTTOM (CST_SCREEN_HEIGHT - CST_ANIMATION_VIEW_SIZE)
+
 /*宽度/高度/大小定义*/
 #define CST_NAVIBAR_HEIGHT 65       //导航栏的宽度
 #define CST_ANIMATION_VIEW_SIZE 128 //动画视图大小

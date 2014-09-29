@@ -13,6 +13,7 @@
     float timeInterval;
     float alpha;
     float angle;
+    int lastEdge;
 }
 
 @end
@@ -70,7 +71,7 @@
             timeInterval = 2.0;
             break;
         case CSTAnimationTwinkle:
-            timeInterval = 1;
+            timeInterval = 0.5;
             break;
         case CSTAnimationRotateAndBlowUp:
             timeInterval = 1;
@@ -79,7 +80,7 @@
             timeInterval = 1.0;
             break;
         case CSTAnimationFastRotate:
-            timeInterval = 1.0;
+            timeInterval = 1;
             break;
         default:
             break;
@@ -126,9 +127,90 @@
     [UIView commitAnimations];
 }
 
+-(float)getValidY:(float)y
+{
+    float validY;
+    
+    switch (lastEdge) {
+        case 2: //上边
+            validY = CST_ANIMATION_TOP;
+            break;
+        case 3: //下边
+            validY = CST_ANIMATION_BOTTOM;
+        default:
+            if (y < CST_ANIMATION_TOP) {
+                y += CST_ANIMATION_TOP;
+            } else if (y > CST_ANIMATION_BOTTOM) {
+                y -= CST_ANIMATION_VIEW_SIZE;
+            }
+            break;
+    }
+
+    
+    return validY;
+}
+
+-(float)getValidX:(float)x
+{
+    float validX;
+    switch (lastEdge) {
+        case 0: //左边
+            validX = CST_ANIMATION_LEFT;
+            break;
+        case 1: //右边
+            validX = CST_ANIMATION_RIGHT;
+        default:
+            validX = x > CST_ANIMATION_RIGHT ? CST_ANIMATION_RIGHT : x;
+            break;
+    }
+    
+    return validX;
+}
+
+-(void)saveValidNewDirection:(int)direction
+{
+    if (direction != lastEdge) {
+        lastEdge = direction;
+    } else {
+        switch (direction) {
+            case 0: //左边
+                lastEdge = 1;
+                break;
+            case 1: //右边
+                lastEdge = 0;
+                break;
+            case 2: //上边
+                lastEdge = 3;
+                break;
+            case 3: //下边
+                lastEdge = 2;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    
+}
+
 -(void)CSTMoving:(id)sender
 {
- 
+    UIView *view = self.viewController.animationView;
+    
+    float x = arc4random() % ((int)CST_SCREEN_WIDTH);
+    float y  = arc4random() % ((int)CST_SCREEN_HEIGHT);
+    
+    int direction = arc4random() % 4;
+    [self saveValidNewDirection:direction];
+    
+    x = [self getValidX:x];
+    y = [self getValidY:y];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:timeInterval];
+    CGRect newFrame = CGRectMake(x, y, view.frame.size.width, view.frame.size.height);
+    view.frame = newFrame;
+    [UIView commitAnimations];
 }
 
 -(void)CSTRotate:(id)sender
@@ -170,10 +252,29 @@
 
 -(void)CSTTwinkle:(id)sender
 {
-    
+    UIView *view = self.viewController.animationView;
+
+    BOOL hide = !view.hidden;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:timeInterval];
+    [view setHidden:hide];
+    [UIView commitAnimations];
 }
+
 -(void)CSTRotateAndBlowUp:(id)sender
 {
-    
+    UIView *view = self.viewController.animationView;
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    CATransform3D fromTransfer = CATransform3DMakeRotation(0, 0, 0, 0);
+    CATransform3D rotateTransfer = CATransform3DMakeRotation(M_PI * 0.5, -5, 5, 0);
+    CATransform3D scaleTransfer = CATransform3DMakeScale(1, 1, 5);
+    /*合并两个动作*/
+    CATransform3D combinedTransfer = CATransform3DConcat(rotateTransfer, scaleTransfer);
+    /*放在3D坐标系中最正确的位置*/
+    [animation setFromValue:[NSValue valueWithCATransform3D:CATransform3DIdentity]];
+    [animation setFromValue:[NSValue valueWithCATransform3D:fromTransfer]];
+    [animation setToValue:[NSValue valueWithCATransform3D:combinedTransfer]];
+    [animation setDuration:timeInterval];
+    [view.layer addAnimation:animation forKey:nil];
 }
 @end
