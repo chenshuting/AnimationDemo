@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, CSTAnimation){
     CSTAnimationMoving,                 //移动
     CSTAnimationBlowUp,                 //放大消失
     CSTAnimationRotate,                 //旋转
-    CSTAnimationRotateAndBlowUp,        //旋转放大消失
+    CSTAnimation3DRotate,               //旋转放大消失
     CSTAnimationClock,                  //时钟
     CSTAnimationFastRotate,             //快速旋转
     CSTAnimationCount                   //总长度

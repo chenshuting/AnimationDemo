@@ -22,7 +22,7 @@
     if (!_menuData) {
         _menuData = [[NSArray alloc] initWithObjects:
                     @"Fade in/out", @"Twinkle", @"Moving", @"Blow up", @"Rotate",
-                    @"Rotate and Blow",@"Clock", @"Fast Rotate",
+                    @"3D Rotate",@"Clock", @"Fast Rotate",
                     nil];
     }
     return _menuData;

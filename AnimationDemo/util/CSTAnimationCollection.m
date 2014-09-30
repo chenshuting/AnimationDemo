@@ -40,7 +40,7 @@
         case CSTAnimationTwinkle:
             animationSelection = @selector(CSTTwinkle:);
             break;
-        case CSTAnimationRotateAndBlowUp:
+        case CSTAnimation3DRotate:
             animationSelection = @selector(CSTRotateAndBlowUp:);
             break;
         case CSTAnimationClock:
@@ -73,7 +73,7 @@
         case CSTAnimationTwinkle:
             timeInterval = 0.5;
             break;
-        case CSTAnimationRotateAndBlowUp:
+        case CSTAnimation3DRotate:
             timeInterval = 1;
             break;
         case CSTAnimationClock:
@@ -270,11 +270,20 @@
     CATransform3D scaleTransfer = CATransform3DMakeScale(1, 1, 5);
     /*合并两个动作*/
     CATransform3D combinedTransfer = CATransform3DConcat(rotateTransfer, scaleTransfer);
+    
     /*放在3D坐标系中最正确的位置*/
     [animation setFromValue:[NSValue valueWithCATransform3D:CATransform3DIdentity]];
     [animation setFromValue:[NSValue valueWithCATransform3D:fromTransfer]];
     [animation setToValue:[NSValue valueWithCATransform3D:combinedTransfer]];
     [animation setDuration:timeInterval];
+    
+    CABasicAnimation *animationOpacity = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [animationOpacity setFromValue:[NSNumber numberWithFloat:alpha]];
+    [animationOpacity setToValue:[NSNumber numberWithFloat:!alpha]];
+    [animationOpacity setDuration:timeInterval];
+    
     [view.layer addAnimation:animation forKey:nil];
+    [view.layer addAnimation:animationOpacity forKey:nil];
+    [view setAlpha:!alpha];
 }
 @end
